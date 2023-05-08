@@ -1,4 +1,4 @@
-﻿let modInfo = {
+let modInfo = {
 	name: "升级树-U1",
 	nameEN: "The Upgrading Tree-U1",
 	id: "The_upgrading_tree",
@@ -9,16 +9,18 @@
 	discordLink: "",
 	initialStartPoints: new ExpantaNum (0.5), // Used for hard resets and new players
 	
-	offlineLimit: 0.5,  // In hours
+	offlineLimit: 2,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.52",
+	num: "0.53",
 	name: "",
 }
 
 let changelog = `<h1>更新日志(Currently not translated):</h1><br>
+	<h3>v0.53</h3><br>
+		- 修复了一些bug.<br><br>
 	<h3>v0.52</h3><br>
 		- 修复了一些英文.<br>
 		- 修复了一些bug.<br><br>

@@ -6,7 +6,7 @@ var metaBoost = n(localStorage.getItem("metaBoost1"))
 
 function getUsedUP(){
     var cost = zero
-    for(i in player.u1.upgrades) cost = cost.add(layers.u1.upgrades[player.u1.upgrades[i]].cost)
+    cost = player.u1.total.add(player.u1.exchangedUnstableU1P).sub(player.u1.points)
     return cost
 }
 function hasMetaUpgrade(id){
@@ -153,7 +153,7 @@ addLayer("u1", {
     resourceEN: "Upgrade Points", // Name of prestige currency
     type: "none", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     effectDescription(){return `<br>A节点重置CD:${formatTime(player.a.cd.toNumber())},将获得${format(getResetGain("a"))}自动化点<br>您已使用${format(getUsedUP())}升级点<br>真实升级点:${format(player.u1.real)}`},
-    effectDescriptionEN(){return `<br>A Node Reset CD:${formatTime(player.a.cd.toNumber())},Will Get ${format(getResetGain("a"))} AP on Reset<br>You've Used ${format(getUsedUP())} Upgrade Points`},
+    effectDescriptionEN(){return `<br>A Node Reset CD:${formatTime(player.a.cd.toNumber())},Will Get ${format(getResetGain("a"))} AP on Reset<br>You've Used ${format(getUsedUP())} Upgrade Points<br>Real Upgrade Point: ${format(player.u1.real)}`},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new ExpantaNum(1)
         mult = mult.mul(layerEffect("p"))
@@ -403,6 +403,12 @@ addLayer("u1", {
             }
         },
         14: {
+            title:"返回元宇宙",
+            titleEN:"Return Meta Universe",
+            onClick(){window.location.href = "../index.html"},
+            canClick:true
+        },
+        21: {
             canClick(){return true},
             display() {return `G升级“细致入微”信息`},
             displayEN() {return `Generator Upgrade 35 information`},
@@ -412,16 +418,18 @@ addLayer("u1", {
                 var product = u+p+b+g+t+s
                 if(options.ch) window.alert(`
                 细致入微信息:\n
+                这些数字为层级中的升级数与购买项等级的总和,保证这些都为100以内的素数!
                 U层级总数: ${format(u)} ${prime.includes(u)?``:`!未满足条件!`}\n\n
                 P层级总数: ${format(p)} ${prime.includes(p)?``:`!未满足条件!`}\n
                 B层级总数: ${format(b)} ${prime.includes(b)?``:`!未满足条件!`}\n
                 G层级总数: ${format(g)} ${prime.includes(g)?``:`!未满足条件!`}\n
                 T层级总数: ${format(t)} ${prime.includes(t)?``:`!未满足条件!`}\n
                 S层级总数: ${format(s)} ${prime.includes(s)?``:`!未满足条件!`}\n\n
-                总和:${format(product)} ${prime.includes(product)?``:`!未满足条件!`}\n\n
-                素数表: ${prime}`)
+                所有层级的总和:${format(product)} ${prime.includes(product)?``:`!未满足条件!`}\n\n
+                *素数表: ${prime}`)
                 else window.alert(`
-                Generator U35 Information:\n
+                Generator Upgrade 35 Information:\n
+                These are bought buyables and upgrades' total amount, and all these numbers have to be prime numbers below 100. (Exclude U buyables)
                 U: ${format(u)} ${prime.includes(u)?``:`!NOT A PRIME NUMBER!`}\n\n
                 P: ${format(p)} ${prime.includes(p)?``:`!NOT A PRIME NUMBER!`}\n
                 B: ${format(b)} ${prime.includes(b)?``:`!NOT A PRIME NUMBER!`}\n
@@ -429,14 +437,9 @@ addLayer("u1", {
                 T: ${format(t)} ${prime.includes(t)?``:`!NOT A PRIME NUMBER!`}\n
                 S: ${format(s)} ${prime.includes(s)?``:`!NOT A PRIME NUMBER!`}\n\n
                 Total: ${format(product)} ${prime.includes(product)?``:`!NOT A PRIME NUMBER!`}\n\n
-                Prime number list: ${prime}`)
+                *Prime number list: ${prime}`)
             },
-            unlocked(){return hasUpgrade("u1",55) && !player.g.unl.includes("35")}
-        },
-        21: {
-            title:"返回元宇宙",
-            onClick(){window.location.href = "../index.html"},
-            canClick:true
+            unlocked(){return hasUpgrade("u1",54) && !player.g.unl.includes("35")}
         },
     },
     upgrades: {

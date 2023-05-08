@@ -82,7 +82,7 @@ var layerA = {
           if(!autoActive(this.id)) return
           if(!layers["r"/* fix this */].layerShown()) return
           player.a[this.id].time += diff            
-          if(autoStat(this.id).lte(player.a[this.id].time) || layers.t.resetsNothing()){
+          if(autoStat(this.id).lte(player.a[this.id].time) || layers.r.resetsNothing()){
             for(i in layers.r.buyables){
               i = Number(i)
               if(!i) break
@@ -95,8 +95,8 @@ var layerA = {
       },
       21: {
         canClick(){return autoBought(this.id)||player.a.points.gte(this.cost)},
-        name:'自动L重置',
-        nameEN:'Automate L Reset',
+        name:'自动T重置',
+        nameEN:'Automate T Reset',
         cost:n(64),
         unlocked(){return true},
         display() {if(!autoBought(this.id)) return `<h3>${this.name}</h3>\n\n价格: ${format(this.cost)}`;return `<h3>${this.name}</h3>\n\n间隔:${autoStat(this.id)}s(在不重置任何东西后自动每帧一次)`},

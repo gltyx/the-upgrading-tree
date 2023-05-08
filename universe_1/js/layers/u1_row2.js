@@ -20,7 +20,7 @@ addLayer("b", {
     exponent: 1.25,
     gainMult() { 
         mult = new ExpantaNum(1)
-        mult = mult.mul(challengeEffect("u1",11))
+        if(hasChallenge('u1',11)) mult = mult.mul(challengeEffect("u1",11))
         return mult
     },
     gainExp() { 
@@ -151,7 +151,7 @@ addLayer("g", {
     exponent: 1.2,
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new ExpantaNum(1)
-        mult = mult.mul(challengeEffect("u1",11))
+        if(hasChallenge('u1',11))mult = mult.mul(challengeEffect("u1",11))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -419,8 +419,8 @@ addLayer("g", {
             unlocked() {return hasUpgrade("u1",54)},
         },
         35: {
-            description: "<text style='color:blue'>细致入微:购买该升级时,UPBGTS六个节点中非U购买项等级和升级的总和是100以内的素数(质数),各个节点内部也满足这一条件.</text>U节点升级总数增幅能量获取.",
-            descriptionEN: "<text style='color:blue'>When you're buying this upgrade,UPBGTS nodes' total non-u-Buyables and Upgrades is a prime number which less than 100.The same in each node.</text>U upgrades boosts energy.",
+            description: "<text style='color:blue'>细致入微:见U层级.</text>U节点升级总数增幅能量获取.",
+            descriptionEN: "<text style='color:blue'>Look at your U layer.</text>U upgrades boosts energy.",
             effect(){
                 var eff = n(player.u1.upgrades.length).div(196).add(1)
                 return eff
